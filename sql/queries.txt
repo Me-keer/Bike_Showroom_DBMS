@@ -1,0 +1,29 @@
+Insert:
+1)"INSERT into bike_details values('$vin','$mid','$status','$bikeid')";
+2)INSERT into payment(pay_date,pay_mode,dis_id,pay_amt,book_id,pay_cus_id) values('$pdate','$pmode','$did','$pamt','$bid','$cid')"
+3)"INSERT into bill(Date,Cus_name,bike_model,bike_price,dis_amt,tax,total) values('$pdate','$name','$bname','$pamt','$dis','$tax','$tamt')";
+4)"INSERT into booking(book_date,delivery_date,book_time,cus_id,bike_id) values('$bdate','$ddate','$time','$cid','$bikeid')";
+5)"INSERT into customer(cus_id,cus_name,cus_address,cus_mobile,cus_uid,cus_uid_no,cus_gender,cus_email,cus_dob,cus_bike_id) 
+values('$cid','$name','$add','$mob','$uid','$un','$gen','$email','$dob','$bid')";
+6)"INSERT into bike_model_details values('$mid','$mname','$desc','$price','$btype','$stock')";
+7)"INSERT into booked_service values('$sid','$cid','$bikeid','$type','$bdate','$ddate','$status')";
+
+Select
+1)SELECT dis_per from discount where dis_id='".$did."'";
+2)"SELECT cus_name from customer where cus_bike_id='".$bkid."'";
+3)"SELECT cus_name from customer where cus_id='".$cid."'";
+4)"SELECT ser_id,bike_id,ser_bd,ser_dd,ser_status from booked_service where cus_id='".$cid."'";
+5)SELECT * FROM booking where cus_id = '".$uname."'";
+6)"SELECT bikestock,bike_price from bike_model_details where bike_model='Yamaha R15 V4'";
+7)"SELECT free_ser from service where cus_id= '".$cid."' and bike_id ='".$bikeid."' ";
+8)"SELECT dis_per from discount where dis_id='".$did."'";
+9)"SELECT cus_name from customer where cus_bike_id='".$bkid."'";
+
+Select & Subqueries & inner join
+1)"SELECT bike_model from bike_model_details bm inner join bike_details bd on bm.bike_model_id=(SELECT bike_model_id from bike_details where bike_id='".$bkid."')";
+
+Select & and
+1)"SELECT * FROM customer where cus_id = '".$uname."' and cus_dob = '".$pass."'";
+2)"SELECT * from administrator where admin_id ='".$name."' and ad_pass = '".$pass."'";
+
+

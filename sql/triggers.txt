@@ -1,0 +1,39 @@
+create or replace function stock()
+returns trigger
+language plpgsql
+as
+$$
+begin
+update bike_model_details set bikestock=bikestock-1 where bike_model_id=(select bike_model_id from bike_details bd where bd.bike_id=new.bike_id);
+update bike_details set bike_bstatus='booked' where bike_id=new.bike_id;
+return new;
+end;
+$$
+
+create trigger stock_drop
+before insert 
+on booking
+for each row 
+execute procedure stock();
+
+
+
+create or replace function ser()
+returns trigger
+language plpgsql
+as
+$$
+begin
+if((select free_ser from service where cus_id=new.cus_id )>0)
+then
+update service set free_ser = free_ser-1 where cus_id=new.cus_id;
+end if;
+return new;
+end;
+$$
+
+create trigger service
+before insert
+on booked_service
+for each row 
+execute procedure ser();
